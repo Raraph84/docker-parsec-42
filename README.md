@@ -1,9 +1,9 @@
 # parsec
 
-Parsec in a docker container with X11 and PulseAudio forwarding.
+Parsec in a docker container with X11 forwarding.
 
 ```bash
-git clone https://github.com/jaredallard/docker-parsec
+git clone https://github.com/Raraph84/docker-parsec-42
 ./parsec
 ```
 
@@ -11,7 +11,7 @@ git clone https://github.com/jaredallard/docker-parsec
 
 * Easily removable and versioned
 * Works on ALL linux distributions that can run Docker (even Gentoo)
-* Sandboxed (remote connects to X and PulseAudio)
+* Sandboxed (remote connects to X)
 * ???
 
 ## Prerequisites

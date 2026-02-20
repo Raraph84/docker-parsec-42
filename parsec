@@ -4,25 +4,14 @@
 
 set -euo pipefail
 
-USERID="$(id -u)"
-GROUPID="$(id -g)"
-
 xhost "local:root"
-if [[ "$USERID" != "1000" ]] || [[ "$GROUPID" != "1000" ]]; then
-  echo "Warning: defaulting to semi-insecure x (userid != containerUserId)"
-  xhost "local:root"
-fi
 
 mkdir -p ~/.parsec
 docker run --rm -v ~/.parsec:/home/parsec/.parsec debian chmod 777 -R /home/parsec/.parsec
 
-echo "launching parsec: (u${USERID}:g${GROUPID})"
 docker run -itd --rm --init \
   --env DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -v "/run/user/$USERID/pulse:/run/user/1000/pulse" \
   --device /dev/dri \
-  --net=host \
-  --privileged \
   -v ~/.parsec:/home/parsec/.parsec \
   ghcr.io/jaredallard/docker-parsec:main app_daemon=1
