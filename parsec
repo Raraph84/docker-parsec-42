@@ -6,12 +6,10 @@ set -euo pipefail
 
 xhost "local:root"
 
-mkdir -p ~/.parsec
-docker run --rm -v ~/.parsec:/home/parsec/.parsec debian chmod 777 -R /home/parsec/.parsec
-
 docker run -itd --rm --init \
+  -u 0:0 \
   --env DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   --device /dev/dri \
-  -v ~/.parsec:/home/parsec/.parsec \
+  -v ~/.parsec:/root/.parsec \
   ghcr.io/jaredallard/docker-parsec:main app_daemon=1
